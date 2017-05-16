@@ -68,50 +68,162 @@
                         <th> View </th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody resp='clients-list'>
                       <?php $i = 1; ?>
                       @foreach($data['clist'] as $company)
                       <tr class="odd gradeX">
                         <td>
                           <?php echo $i<10 ? '0'.$i : $i; ?>
-                        </td>
-                        <td><a name='client-name' hrefurl="#client_details" data-clientID='{{$company->Company_ID}}' data-resp="tab">{{$company->Company_Name}}</a></td>
-                        <td>{{$company->Address}}</td>
-                        <td class="center"> {{$company->Contact_Person}} </td>
-                        <td>
-                          <a class="edit" hrefurl="#client_details" data-clientID='{{$company->Company_ID}}' data-resp="tab"> View / Edit </a>
-                        </td>
-                      </tr>
-                      <?php $i++; ?>
-                      @endforeach
-                    </tbody>
-                  </table>
+                          </td>
+                          <td><a name='client-name' hrefurl="#client_details" data-clientID='{{$company->Company_ID}}' data-resp="tab">{{$company->Company_Name}}</a></td>
+                          <td>{{$company->Address}}</td>
+                          <td class="center"> {{$company->Contact_Person}} </td>
+                          <td>
+                            <a class="edit" hrefurl="#client_details" data-clientID='{{$company->Company_ID}}' data-resp="tab"> View / Edit </a>
+                          </td>
+                        </tr>
+                        <?php $i++; ?>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
+
+              <div class="tab-pane" id="client_details">
+                <div class='row'>
+                  <div class="col-md-7">
+                    <h4><strong id="cmp_nameh"></strong></h4>
+                    <h5 id="cmp_addrh"></h5>
+                  </div>
+                  <div class="col-md-5">
+                    <div class="row">
+                      <div class="col-xs-12 pull-right text-right form-group">
+                        <button class="btn blue btn-outline" btn-role="edit-client" hrefurl="#edit-client">
+                          EDIT CLIENT
+                          <i class="fa fa-pencil"></i>
+                        </button>
+                      </div>
+                      <div class="col-xs-12 small text-right">
+                        Open Jobs:
+                        <span id="#" class="badge badge-success">0</span>
+                        <span class="font-default">  |  </span>
+                        Completed Jobs:
+                        <span id="#" class="badge badge-info">0</span>
+                        <span class="font-default">  |  </span>
+                        Closed Jobs:
+                        <span id="#" class="badge badge-primary">0</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class='row'>
+                  <div class='col-md-6'>
+                    <div class="portlet-body">
+                      <div class="table-scrollable">
+                        <table class="table table-hover table-light">
+                          <tbody>
+                            <tr>
+                              <td class="highlight">Company Name :</td>
+                              <td id="cmp_name"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Address :</td>
+                              <td id="cmp_addr"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Location:</td>
+                              <td id="cmp_location"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">District:</td>
+                              <td id="cmp_district"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Industry:</td>
+                              <td id="cmp_industry"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Contact No:</td>
+                              <td id="cmp_contact"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Fax:</td>
+                              <td id="cmp_fax"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Email:</td>
+                              <td id="cmp_email"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Website:</td>
+                              <td id="cmp_website"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class='col-md-6'>
+                    <div class="portlet-body">
+                      <div class="table-scrollable">
+                        <table class="table table-hover table-light">
+                          <tbody>
+                            <tr>
+                              <td class="highlight">Contact Person :</td>
+                              <td id="cmp_contperson"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Contact No :</td>
+                              <td id="cmp_cpcont"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Email :</td>
+                              <td id="cmp_cpemail"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Description :</td>
+                              <td>
+                                <span id="cmp_desc"></span>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Date Registered :</td>
+                              <td id="cmp_regdate"></td>
+                            </tr>
+                            <tr>
+                              <td class="highlight">Added / Updated by :</td>
+                              <td id="cmp_addedperson"></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="tab-pane" id="new_client">
+                new client goes here
+              </div>
+
+
+
             </div>
-
-            <div class="tab-pane" id="client_details">
-              client details goes here
-            </div>
-
-            <div class="tab-pane" id="new_client">
-              new client goes here
-            </div>
-
-
-
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-@endsection('body')
-@section('plugins')
-<script src="{{asset('js/datatable.js')}}" type="text/javascript"></script>
-<script src="{{asset('plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
-@endsection('plugins')
-@section('page-scripts')
-<script src='{{asset("js/clients.min.js")}}'></script>
-@endsection('page-scripts')
+    @endsection('body')
+    @section('plugins')
+    <script src="{{asset('js/datatable.js')}}" type="text/javascript"></script>
+    <script src="{{asset('plugins/datatables/datatables.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('plugins/datatables/plugins/bootstrap/datatables.bootstrap.js')}}" type="text/javascript"></script>
+    @endsection('plugins')
+    @section('page-scripts')
+    <script src='{{asset("js/clients.min.js")}}'></script>
+    @endsection('page-scripts')
