@@ -21,7 +21,7 @@
           <ul class="nav nav-tabs" role='tab-options' section='clients'>
             <li class="active"><a href="#clients_list" data-toggle="tab">Clients List</a></li>
             <li><a href="#client_details" data-toggle="tab" disabled='disabled'> Clients Details </a></li>
-            <li><a href="#new_client" data-toggle="tab"> <span class="text-primary"> <strong>New Order</strong></span></a></li>
+            <li><a href="#new_client" data-toggle="tab"> <span class="text-primary"> <strong>New Client</strong></span></a></li>
           </ul>
           <div class="tab-content">
             <!-- ##################################### -->
@@ -89,6 +89,17 @@
                 </div>
               </div>
             </div>
+
+            <div class="tab-pane" id="client_details">
+              client details goes here
+            </div>
+
+            <div class="tab-pane" id="new_client">
+              new client goes here
+            </div>
+
+
+
           </div>
         </div>
       </div>
