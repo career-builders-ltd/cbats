@@ -17,7 +17,7 @@ $(document).ready(function(){
   $('#job_description').summernote({height: 300});
 
   $("#ov_status_edit,#ov_priority_edit").select2({
-    width:'100%',    
+    width:'100%',
   });
 
 

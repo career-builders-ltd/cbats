@@ -11,6 +11,7 @@
 <link href="{{asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('plugins/select2/css/select2-bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('plugins/typeahead/typeahead.css')}}" rel="stylesheet" type="text/css" />
 @endsection('styles')
 
 @section('head')
@@ -548,8 +549,8 @@
 													<tr>
 														<td class="highlight">Location:</td>
 														<td class="hidden-xs">
-															<div class="form-group form-md-line-input has-success">
-																	<input type="text" id="location" name="location" class="twitter-typeahead form-control" style="position: relative; vertical-align: top; background-color: transparent;">
+															<div class="the-basics form-group form-md-line-input has-success">
+																	<input type="text" id="location" name="location" class="typeahead form-control" style="position: relative; vertical-align: top; background-color: transparent;">
 															</div>
 														</td>
 													</tr>
@@ -559,7 +560,7 @@
 															<div class="form-group form-md-line-input has-error">
 																<div class="input-group">
 																	<div class="input-group-control">
-																		<input type="text" class="form-control" placeholder="Placeholder" value="Career Builders (Pvt) Ltd">
+																		<input type="text" class="form-control" placeholder="Client Name" value="" id="client">
 																	</div>
 																	<span class="input-group-btn btn-right">
 																		<button type="button" class="btn green-haze dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> Client
@@ -576,7 +577,9 @@
 																	</span>
 																</div>
 															</div>
-															<div class="modal" id="client_details" tabindex="-1" role="basic" aria-hidden="true" style="display: none;margin-top:100px;">
+
+
+															<div class="modal fade" id="client_details" role="basic" aria-hidden="true">
 																<div class="modal-dialog modal-lg">
 																		<div class="modal-content">
 																				<div class="modal-header">
@@ -599,7 +602,7 @@
 																									<div class="tab-content">
 																											<div class="tab-pane" id="search_client">
 																												<div class="form-group">
-																													<input type="text" id="srch_client" name="search_client" class="twitter-typeahead form-control" style="position: relative; vertical-align: top; background-color: transparent;">
+																													<input type="text" id="srch_client" name="search_client" class="typeahead form-control" placeholder="Search here for a client" style="position: relative; vertical-align: top; background-color: transparent;">
 																												</div>
 																												<div class="row">
 																													<div class="col-lg-6">
@@ -657,9 +660,23 @@
 																												<button type="button" class="btn green">Select</button>
 																											</div>
 																											<div class="tab-pane" id="add_client">
+																												<!--@if (session('status'))
+																														<div class="alert alert-success">
+																																{{ session('status') }}
+																														</div>
+																												@endif
+																												@if (count($errors) > 0)
+																			                    <div class="alert alert-danger">
+																			                        <ul>
+																			                            @foreach ($errors->all() as $error)
+																			                                <li>{{ $error }}</li>
+																			                            @endforeach
+																			                        </ul>
+																			                    </div>
+																			                  @endif-->
 																												<div class="row">
-																													<!--<div class="col-lg-6">
-																														<div class="" style="border-bottom:1px solid #3598DC;margin-bottom:20px;margin-top:20px;">
+																													<div class="col-lg-7">
+																														<div class="" style="border-bottom:1px solid #3598DC;margin-bottom:10px;margin-top:-20px">
 																															<h5 class="font-blue">Company Detailes</h5>
 																														</div>
 																															<form>
@@ -669,13 +686,37 @@
 																																</div>
 																																<div class="form-group">
 																																	<label for="">Address:</label>
-																																	<textarea class="form-control" name="name" rows="3" id="company_address_add" style="resize:none;"></textarea>
+																																	<textarea class="form-control" name="name" rows="2" id="company_address_add" style="resize:none;"></textarea>
+																																</div>
+																																<div class="row">
+																																	<div class="col-lg-6">
+																																		<div class="form-group">
+																																			<label for="">City:</label>
+																																			<input type="text" class="form-control" id="company_city_add" name="" value="">
+																																		</div>
+																																	</div>
+																																	<div class="col-lg-6">
+																																		<div class="form-group">
+																																			<label for="">District:</label>
+																																			<select id="district_1" class="form-control select2">
+																																				<option disabled="true" selected="true">- Select District-</option>
+																																				@foreach($data['district'] as $district)
+																																				<option class="country_id" value="{{$district->District_ID}}" data-countryid="{{$district->Country_ID}}">{{$district->District_Name}}</option>
+																																				@endforeach
+																																			</select>
+																																		</div>
+																																	</div>
 																																</div>
 																																<div class="form-group">
-																																	<label for="">City:</label>
-																																	<input type="text" class="form-control" id="company_city_add" name="" value="">
+																																	<label for="">Industry:</label>
+																																	<select id="industry" class="form-control select2">
+																																		<option disabled="true" selected="true">- Select Industry -</option>
+																																		@foreach($data['industry'] as $industry)
+																																		<option value="{{$industry->Industry_ID}}">{{$industry->Industry}}</option>
+																																		@endforeach
+																																	</select>
 																																</div>
-																																<div class="form-group">
+																																<!--<div class="form-group">
 																																	<label for="">Contact No:</label>
 																																	<input type="text" class="form-control" id="company_contact_add" name="" value="">
 																																</div>
@@ -686,14 +727,14 @@
 																																<div class="form-group">
 																																	<label for="">Website:</label>
 																																	<input type="text" class="form-control" id="company_web_add" name="" value="">
-																																</div>
+																																</div>-->
 																															</form>
-																													</div>-->
-																													<div class="col-lg-6">
-																														<div class="" style="border-bottom:1px solid #1BA39C;margin-bottom:20px;margin-top:20px;">
+																														</div>
+																														<div class="col-lg-5">
+																														<div class="" style="border-bottom:1px solid #1BA39C;margin-bottom:10px;margin-top:-20px">
 																															<h5 class="font-green-seagreen">Contact Person</h5>
 																														</div>
-																															<form method="post" action="{{asset('addnew')}}" id="newclient">
+																															<form method="post" action="" id="">
 																																<div class="form-group">
 																																	<label for="">Name:</label>
 																																	<input type="text" class="form-control" id="cperson_name_add" name="" value="">
@@ -707,10 +748,9 @@
 																																	<input type="text" class="form-control" id="cperson_email_add" name="" value="">
 																																</div>
 																															</form>
-																													</div>
+																															</div>
 																												</div>
-																													<button type="submit" class="btn btn-primary" id="client_save">Save</button>
-																													<button type="button" class="btn green">Select</button>
+																													<button type="button" class="btn btn-primary" id="client_save">Save &amp; Select</button>
 																											</div>
 																									</div>
 																							</div>
@@ -730,13 +770,13 @@
 
 															<div class="col-md-7 no-side-padding">
 																<div class="form-group form-md-line-input has-success">
-																	<input type="text" class="form-control" id="form_control_1" placeholder="Contact Name" value="Dharshana Ekanayake">
+																	<input type="text" class="form-control" id="client_name" placeholder="Contact Name" value="">
 																	<div class="form-control-focus"> </div>
 																</div>
 															</div>
 															<div class="col-md-5 no-side-padding">
 																<div class="form-group form-md-line-input has-warning">
-																	<input type="text" class="form-control" id="form_control_1" placeholder="Contact Number" value="077 3564911">
+																	<input type="text" class="form-control" id="client_contact" placeholder="Contact Number" value="">
 																	<div class="form-control-focus"> </div>
 																</div>
 															</div>
@@ -819,10 +859,11 @@
 										<tr>
 											<td class="highlight">Category:</td>
 											<td class="hidden-xs">
-													<select id="category" class="form-control select2 select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-																<option>Accounting</option>
-																<option>Sales</option>
-																<option>Marketing &amp; Communication</option>
+													<select id="category" class="form-control select2" aria-hidden="true">
+														<option value="" disabled="true" selected="true">- Select Industry - </option>
+														@foreach($data['industry'] as $industry)
+														<option value="{{$industry->Industry_ID}}">{{$industry->Industry}}</option>
+														@endforeach
 													</select>
 											</td>
 										</tr>
@@ -902,7 +943,8 @@
 <script src="{{asset('plugins/bootstrap-markdown/js/bootstrap-markdown.js')}}" type="text/javascript"></script>
 <script src="{{asset('plugins/bootstrap-summernote/summernote.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('plugins/select2/js/select2.full.min.js')}}" type="text/javascript"></script>
-<script src="{{asset('plugins/bootstrap-typeahead/bootstrap3-typeahead.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('plugins/typeahead/handle.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('plugins/typeahead/typeahead.bundles.min.js')}}" type="text/javascript"></script>
 @endsection('plugins')
 
 @section('page-scripts')

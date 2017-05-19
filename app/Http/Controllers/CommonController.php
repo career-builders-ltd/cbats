@@ -11,6 +11,7 @@ use App\district;
 use App\order;
 use App\company;
 use App\order_status;
+use App\industry;
 use DB;
 
 class CommonController extends Controller
@@ -32,6 +33,8 @@ class CommonController extends Controller
 		$data = array(
 			'order_status'=>order_status::all(),
 			'order'=>DB::select($orderQry),
+			'industry'=>industry::all(),
+			'district'=>district::all(),
 		);
 		return view("jobs")->with(['data'=>$data]);
 	}

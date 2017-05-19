@@ -44,6 +44,10 @@ $(document).ready(function() {
         $("#cmp_addedperson").html(data.cmp_addedperson);
         switchtab=true;
         $("ul[role='tab-options'][section='clients']").find('a[href="'+respTab+'"]').trigger('click');
+
+        $("ul[role='tab-options'][section='clients']").find('a[href="#edit_client"]').on('click',function(){
+
+        });
       },
       error : function(err){
         App.unblockUI();

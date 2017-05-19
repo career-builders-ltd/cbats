@@ -20,7 +20,8 @@
         <div class="tabbable-line boxless margin-bottom-20">
           <ul class="nav nav-tabs" role='tab-options' section='clients'>
             <li class="active"><a href="#clients_list" data-toggle="tab">Clients List</a></li>
-            <li><a href="#client_details" data-toggle="tab" disabled='disabled'> Clients Details </a></li>
+            <li><a href="#client_details" data-toggle="tab"> Clients Details </a></li>
+            <li class='hidden'><a href="#edit_client" data-toggle="tab"> Edit Client </a></li>
             <li><a href="#new_client" data-toggle="tab"> <span class="text-primary"> <strong>New Client</strong></span></a></li>
           </ul>
           <div class="tab-content">
@@ -99,10 +100,7 @@
                   <div class="col-md-5">
                     <div class="row">
                       <div class="col-xs-12 pull-right text-right form-group">
-                        <button class="btn blue btn-outline" btn-role="edit-client" hrefurl="#edit-client">
-                          EDIT CLIENT
-                          <i class="fa fa-pencil"></i>
-                        </button>
+                        <button class="btn blue btn-outline" btn-role="edit-client" hrefurl="#edit_client">EDIT CLIENT <i class="fa fa-pencil"></i></button>
                       </div>
                       <div class="col-xs-12 small text-right">
                         Open Jobs:
@@ -204,6 +202,10 @@
                   </div>
 
                 </div>
+              </div>
+
+              <div class="tab-pane" id="edit_client">
+
               </div>
 
               <div class="tab-pane" id="new_client">

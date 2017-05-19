@@ -23,6 +23,6 @@ Route::group(['middleware'=>['user']],function(){
   */
   Route::get('/clients','CommonController@clients');
   Route::post("/load-clientData",'ClientController@loadClientData');
-
+  Route::post('/newclient','ClientController@newclient');
 
 });
