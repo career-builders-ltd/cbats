@@ -34,7 +34,7 @@ $(document).ready(function(){
 		//$("#mySelect2,#mySelect3").select2({width:'100%'});
 
 
-/////////////*******   typeahead   *********/////////////
+////////////*******   typeahead   *********////////////
 
 		//typeahead for location
 
